@@ -30,12 +30,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/array-to-xlsx-downloader.git"
+    "url": "https://github.com/SriRakeshKumar/ssr-arraytoxlsx.git"
   },
   "bugs": {
-    "url": "https://github.com/yourusername/array-to-xlsx-downloader/issues"
+    "url": "https://github.com/SriRakeshKumar/ssr-arraytoxlsx/issues"
   },
-  "homepage": "https://github.com/yourusername/array-to-xlsx-downloader#readme",
+  "homepage": "https://github.com/SriRakeshKumar/ssr-arraytoxlsx#readme",
   "dependencies": {
     "xlsx-js-style": "^1.2.0"
   }

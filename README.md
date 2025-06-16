@@ -36,7 +36,7 @@ A lightweight, TypeScript-compatible npm library for converting array data to do
 ## Installation
 
 ```bash
-npm install array-to-xlsx-downloader
+npm install ssr-arraytoxlsx
 ```
 
 ## Usage
@@ -44,7 +44,7 @@ npm install array-to-xlsx-downloader
 ### Basic Usage (JavaScript)
 
 ```javascript
-import { downloadArrayAsXLSX } from "array-to-xlsx-downloader";
+import { ArrayToXLSX } from "ssr-arraytoxlsx";
 
 // Example: Download button click handler
 document.getElementById("download-report").addEventListener("click", () => {
@@ -54,7 +54,7 @@ document.getElementById("download-report").addEventListener("click", () => {
     { name: "Bob Johnson", age: 35, city: "Chicago" },
   ];
 
-  downloadArrayAsXLSX(reportData, {
+  ArrayToXLSX(reportData, {
     filename: "user-report",
     sheetName: "Users",
   });
@@ -64,11 +64,7 @@ document.getElementById("download-report").addEventListener("click", () => {
 ### TypeScript Usage
 
 ```typescript
-import {
-  downloadArrayAsXLSX,
-  ArrayData,
-  DownloadOptions,
-} from "array-to-xlsx-downloader";
+import { ArrayToXLSX, ArrayData, DownloadOptions } from "ssr-arraytoxlsx";
 
 interface User {
   name: string;
@@ -84,7 +80,7 @@ const handleDownload = (data: User[]) => {
     includeHeaders: true,
   };
 
-  downloadArrayAsXLSX(data, options);
+  ArrayToXLSX(data, options);
 };
 ```
 
@@ -92,7 +88,7 @@ const handleDownload = (data: User[]) => {
 
 ```jsx
 import React, { useState } from "react";
-import { downloadArrayAsXLSX } from "array-to-xlsx-downloader";
+import { ArrayToXLSX } from "ssr-arraytoxlsx";
 
 const ReportComponent = () => {
   const [reportData, setReportData] = useState([]);
@@ -105,7 +101,7 @@ const ReportComponent = () => {
       { product: "Tablet", sales: 200, revenue: 40000 },
     ];
 
-    downloadArrayAsXLSX(data, {
+    ArrayToXLSX(data, {
       filename: "sales-report",
       sheetName: "Q1 Sales",
       headers: ["Product Name", "Units Sold", "Total Revenue"],
@@ -126,7 +122,7 @@ export default ReportComponent;
 </template>
 
 <script>
-import { downloadArrayAsXLSX } from "array-to-xlsx-downloader";
+import { ArrayToXLSX } from "ssr-arraytoxlsx";
 
 export default {
   methods: {
@@ -137,7 +133,7 @@ export default {
         { name: "Charlie", score: 92, grade: "A" },
       ];
 
-      downloadArrayAsXLSX(data, {
+      ArrayToXLSX(data, {
         filename: "student-grades",
         sheetName: "Grades",
       });
@@ -150,7 +146,7 @@ export default {
 ### Array of Arrays Example
 
 ```javascript
-import { downloadArrayAsXLSX } from "array-to-xlsx-downloader";
+import { ArrayToXLSX } from "ssr-arraytoxlsx";
 
 const matrixData = [
   ["Product", "Q1", "Q2", "Q3", "Q4"],
@@ -159,7 +155,7 @@ const matrixData = [
   ["Tablets", 80, 90, 85, 95],
 ];
 
-downloadArrayAsXLSX(matrixData, {
+ArrayToXLSX(matrixData, {
   filename: "quarterly-sales",
   includeHeaders: false, // First row is already headers
 });
@@ -167,7 +163,7 @@ downloadArrayAsXLSX(matrixData, {
 
 ## API Reference
 
-### `downloadArrayAsXLSX(data, options)`
+### `ArrayToXLSX(data, options)`
 
 Main function to convert array data to downloadable XLSX file.
 
@@ -194,7 +190,7 @@ interface DownloadOptions {
 Validates if the provided data is in the correct format for conversion.
 
 ```javascript
-import { validateArrayData } from "array-to-xlsx-downloader";
+import { validateArrayData } from "ssr-arraytoxlsx";
 
 const data = [{ name: "John", age: 30 }];
 if (validateArrayData(data)) {
@@ -207,14 +203,14 @@ if (validateArrayData(data)) {
 Converts a CSV string to array format suitable for XLSX conversion.
 
 ```javascript
-import { csvToArray, downloadArrayAsXLSX } from "array-to-xlsx-downloader";
+import { csvToArray, ArrayToXLSX } from "ssr-arraytoxlsx";
 
 const csvData = `Name,Age,City
 John Doe,30,New York
 Jane Smith,25,Los Angeles`;
 
 const arrayData = csvToArray(csvData);
-downloadArrayAsXLSX(arrayData, {
+ArrayToXLSX(arrayData, {
   filename: "csv-converted-data",
 });
 ```
@@ -246,7 +242,7 @@ The library includes comprehensive error handling:
 
 ```javascript
 try {
-  downloadArrayAsXLSX(data, options);
+  ArrayToXLSX(data, options);
   console.log("Download initiated successfully!");
 } catch (error) {
   console.error("Download failed:", error.message);
@@ -296,10 +292,10 @@ This library works in all modern browsers that support:
 
 ```bash
 # Install the package
-npm install array-to-xlsx-downloader
+npm install ssr-arraytoxlsx
 
 # For TypeScript projects, types are included
-# No need for @types/array-to-xlsx-downloader
+# No need for @types/ssr-arraytoxlsx
 ```
 
 ## Troubleshooting
@@ -326,7 +322,7 @@ For very large datasets (10,000+ rows), consider:
 
 ```bash
 # Clone the repository
-git clone [your-repo-url]
+git clone https://github.com/SriRakeshKumar/ssr-arraytoxlsx.git
 
 # Install dependencies
 npm install
