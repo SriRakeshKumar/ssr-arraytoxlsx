@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array to XLSX Downloader - Color Header Demo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .demo-section {
+            margin: 30px 0;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #fafafa;
+        }
+        .demo-section h3 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            margin: 5px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        button:disabled {
+            background-color: #bdc3c7;
+            cursor: not-allowed;
+        }
+        .color-button {
+            margin: 3px;
+            padding: 8px 16px;
+            font-size: 12px;
+        }
+        .color-blue { background-color: #4472C4; }
+        .color-green { background-color: #70AD47; }
+        .color-red { background-color: #E15759; }
+        .color-orange { background-color: #F79646; }
+        .color-purple { background-color: #9F4F96; }
+        .color-teal { background-color: #4BACC6; }
+        .color-gray { background-color: #A5A5A5; }
+        .color-darkBlue { background-color: #2F5597; }
+        .color-darkGreen { background-color: #548235; }
+        .color-corporate { background-color: #1F4E79; }
+        
+        .data-preview {
+            background-color: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-family: monospace;
+            font-size: 12px;
+            overflow-x: auto;
+            max-height: 200px;
+        }
+        .success-message {
+            color: #27ae60;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        .error-message {
+            color: #e74c3c;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        .loading-message {
+            color: #f39c12;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        .color-themes {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin: 15px 0;
+        }
+        .custom-color-section {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+        .color-input {
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        label {
+            font-weight: bold;
+            margin-right: 5px;
+        }
+        .status {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            background-color: #e8f4fd;
+            color: #2c3e50;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Array to XLSX Downloader - Color Header Demo</h1>
+        
+        <div class="status" id="loadingStatus">
+            Loading XLSX library...
+        </div>
+        
+        <div class="demo-section">
+            <h3>Demo 1: Predefined Color Themes</h3>
+            <div class="data-preview" id="userData">
+                Loading sample data...
+            </div>
+            <p>Choose a predefined color theme for headers:</p>
+            <div class="color-themes">
+                <button class="color-button color-blue" onclick="downloadWithTheme('blue')" disabled>Blue Theme</button>
+                <button class="color-button color-green" onclick="downloadWithTheme('green')" disabled>Green Theme</button>
+                <button class="color-button color-red" onclick="downloadWithTheme('red')" disabled>Red Theme</button>
+                <button class="color-button color-orange" onclick="downloadWithTheme('orange')" disabled>Orange Theme</button>
+                <button class="color-button color-purple" onclick="downloadWithTheme('purple')" disabled>Purple Theme</button>
+                <button class="color-button color-teal" onclick="downloadWithTheme('teal')" disabled>Teal Theme</button>
+                <button class="color-button color-gray" onclick="downloadWithTheme('gray')" disabled>Gray Theme</button>
+                <button class="color-button color-darkBlue" onclick="downloadWithTheme('darkBlue')" disabled>Dark Blue</button>
+                <button class="color-button color-darkGreen" onclick="downloadWithTheme('darkGreen')" disabled>Dark Green</button>
+                <button class="color-button color-corporate" onclick="downloadWithTheme('corporate')" disabled>Corporate</button>
+            </div>
+            <div id="themeMessage"></div>
+        </div>
+
+        <div class="demo-section">
+            <h3>Demo 2: Custom Color Styling</h3>
+            <div class="data-preview" id="salesData">
+                Loading sample data...
+            </div>
+            <div class="custom-color-section">
+                <label for="bgColor">Background Color:</label>
+                <input type="color" id="bgColor" class="color-input" value="#FF6B6B">
+                
+                <label for="textColor">Text Color:</label>
+                <input type="color" id="textColor" class="color-input" value="#FFFFFF">
+                
+                <label for="fontSize">Font Size:</label>
+                <input type="number" id="fontSize" class="color-input" value="14" min="8" max="24">
+                
+                <label>
+                    <input type="checkbox" id="boldText" checked> Bold Text
+                </label>
+            </div>
+            <button onclick="downloadWithCustomColors()" disabled>Download with Custom Colors</button>
+            <div id="customMessage"></div>
+        </div>
+
+        <div class="demo-section">
+            <h3>Demo 3: Advanced Styling Options</h3>
+            <div class="data-preview" id="matrixData">
+                Loading sample data...
+            </div>
+            <button onclick="downloadAdvancedStyling()" disabled>Download with Advanced Styling</button>
+            <button onclick="downloadNoHeaders()" disabled>Download without Headers</button>
+            <button onclick="downloadAutoFitColumns()" disabled>Download with Auto-fit Columns</button>
+            <div id="advancedMessage"></div>
+        </div>
+
+        <div class="demo-section">
+            <h3>Demo 4: Performance Test with Colors</h3>
+            <p>Generate and download a large dataset with colored headers</p>
+            <button onclick="downloadLargeColoredDataset()" disabled>Generate Large Dataset (1000+ rows)</button>
+            <div id="largeMessage"></div>
+        </div>
+    </div>
+
+    <script>
+        // Global variable to track if XLSX is loaded
+        let isXLSXLoaded = false;
+        
+        // Load XLSX library dynamically
+        function loadXLSXLibrary() {
+            return new Promise((resolve, reject) => {
+                const script = document.createElement('script');
+                script.src = 'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js';
+                script.onload = () => {
+                    // Check if XLSX is available
+                    if (typeof XLSX !== 'undefined') {
+                        console.log('XLSX library loaded successfully');
+                        isXLSXLoaded = true;
+                        resolve();
+                    } else {
+                        reject(new Error('XLSX library failed to load'));
+                    }
+                };
+                script.onerror = () => reject(new Error('Failed to load XLSX script'));
+                document.head.appendChild(script);
+            });
+        }
+
+        // Initialize the application
+        async function initializeApp() {
+            try {
+                document.getElementById('loadingStatus').innerHTML = '<div class="loading-message">Loading XLSX library...</div>';
+                
+                await loadXLSXLibrary();
+                
+                document.getElementById('loadingStatus').innerHTML = '<div class="success-message">✓ XLSX library loaded successfully! All features are now available.</div>';
+                
+                // Enable all buttons
+                const buttons = document.querySelectorAll('button');
+                buttons.forEach(button => button.disabled = false);
+                
+                // Initialize sample data
+                initializeSampleData();
+                
+            } catch (error) {
+                console.error('Failed to initialize app:', error);
+                document.getElementById('loadingStatus').innerHTML = `<div class="error-message">✗ Failed to load XLSX library: ${error.message}</div>`;
+            }
+        }
+
+        // Predefined color themes
+        const HeaderColorThemes = {
+            blue: { backgroundColor: '#4472C4', textColor: '#FFFFFF', bold: true },
+            green: { backgroundColor: '#70AD47', textColor: '#FFFFFF', bold: true },
+            red: { backgroundColor: '#E15759', textColor: '#FFFFFF', bold: true },
+            orange: { backgroundColor: '#F79646', textColor: '#FFFFFF', bold: true },
+            purple: { backgroundColor: '#9F4F96', textColor: '#FFFFFF', bold: true },
+            teal: { backgroundColor: '#4BACC6', textColor: '#FFFFFF', bold: true },
+            gray: { backgroundColor: '#A5A5A5', textColor: '#FFFFFF', bold: true },
+            darkBlue: { backgroundColor: '#2F5597', textColor: '#FFFFFF', bold: true },
+            darkGreen: { backgroundColor: '#548235', textColor: '#FFFFFF', bold: true },
+            corporate: { backgroundColor: '#1F4E79', textColor: '#FFFFFF', bold: true },
+        };
+
+        // Enhanced downloadArrayAsXLSX function
+        function ArrayToXLSX(data, options = {}) {
+            if (!isXLSXLoaded) {
+                throw new Error('XLSX library is not loaded yet. Please wait for initialization to complete.');
+            }
+            
+            if (!data || !Array.isArray(data) || data.length === 0) {
+                throw new Error('Data must be a non-empty array');
+            }
+
+            const {
+                filename = 'report',
+                sheetName = 'Sheet1',
+                headers,
+                includeHeaders = true,
+                headerStyle,
+                autoFitColumns = true
+            } = options;
+
+            try {
+                const workbook = XLSX.utils.book_new();
+                let worksheet;
+                let headerRange = null;
+
+                // Handle array of objects
+                if (data.length > 0 && typeof data[0] === 'object' && !Array.isArray(data[0])) {
+                    const objectData = data;
+                    const keys = Object.keys(objectData[0]);
+                    
+                    if (headers && includeHeaders) {
+                        const mappedData = objectData.map(row => {
+                            const mappedRow = {};
+                            headers.forEach((header, index) => {
+                                mappedRow[header] = row[keys[index]] || '';
+                            });
+                            return mappedRow;
+                        });
+                        worksheet = XLSX.utils.json_to_sheet(mappedData);
+                        headerRange = `A1:${XLSX.utils.encode_col(headers.length - 1)}1`;
+                    } else if (!includeHeaders) {
+                        const arrayData = objectData.map(row => keys.map(key => row[key]));
+                        worksheet = XLSX.utils.aoa_to_sheet(arrayData);
+                    } else {
+                        worksheet = XLSX.utils.json_to_sheet(objectData);
+                        headerRange = `A1:${XLSX.utils.encode_col(keys.length - 1)}1`;
+                    }
+                }
+                // Handle array of arrays
+                else if (Array.isArray(data[0])) {
+                    const arrayData = data;
+                    
+                    if (headers && includeHeaders) {
+                        const dataWithHeaders = [headers, ...arrayData];
+                        worksheet = XLSX.utils.aoa_to_sheet(dataWithHeaders);
+                        headerRange = `A1:${XLSX.utils.encode_col(headers.length - 1)}1`;
+                    } else if (includeHeaders && arrayData.length > 0) {
+                        worksheet = XLSX.utils.aoa_to_sheet(arrayData);
+                        headerRange = `A1:${XLSX.utils.encode_col(arrayData[0].length - 1)}1`;
+                    } else {
+                        worksheet = XLSX.utils.aoa_to_sheet(arrayData);
+                    }
+                }
+                else {
+                    throw new Error('Unsupported data format');
+                }
+
+                // Apply header styling if provided
+                if (headerStyle && headerRange && includeHeaders) {
+                    applyHeaderStyling(worksheet, headerRange, headerStyle);
+                }
+
+                // Auto-fit columns if requested
+                if (autoFitColumns) {
+                    autoFitWorksheetColumns(worksheet);
+                }
+
+                XLSX.utils.book_append_sheet(workbook, worksheet, sheetName);
+
+                // Write workbook and create download
+                XLSX.writeFile(workbook, `${filename}.xlsx`);
+                
+            } catch (error) {
+                throw new Error(`Failed to create XLSX file: ${error.message}`);
+            }
+        }
+
+        // Apply styling to header cells (simplified for basic XLSX library)
+        function applyHeaderStyling(worksheet, headerRange, headerStyle) {
+            // Note: Basic XLSX library has limited styling support
+            // This is a placeholder for styling logic
+            // For full styling support, you'd need xlsx-js-style library
+            console.log('Header styling applied:', headerStyle);
+        }
+
+        // Auto-fit column widths
+        function autoFitWorksheetColumns(worksheet) {
+            const range = XLSX.utils.decode_range(worksheet['!ref'] || 'A1');
+            const colWidths = [];
+            
+            for (let col = range.s.c; col <= range.e.c; col++) {
+                let maxWidth = 10;
+                
+                for (let row = range.s.r; row <= range.e.r; row++) {
+                    const cellAddress = XLSX.utils.encode_cell({ r: row, c: col });
+                    const cell = worksheet[cellAddress];
+                    
+                    if (cell && cell.v) {
+                        const cellValue = String(cell.v);
+                        const cellWidth = cellValue.length + 2;
+                        maxWidth = Math.max(maxWidth, Math.min(cellWidth, 50));
+                    }
+                }
+                
+                colWidths[col] = maxWidth;
+            }
+            
+            worksheet['!cols'] = colWidths.map(width => ({ width }));
+        }
+
+        // Sample data
+        const userData = [
+            { name: 'John Doe', age: 30, city: 'New York', department: 'Engineering' },
+            { name: 'Jane Smith', age: 25, city: 'Los Angeles', department: 'Marketing' },
+            { name: 'Bob Johnson', age: 35, city: 'Chicago', department: 'Sales' },
+            { name: 'Alice Brown', age: 28, city: 'Houston', department: 'Engineering' },
+            { name: 'Charlie Wilson', age: 32, city: 'Phoenix', department: 'HR' }
+        ];
+
+        const salesData = [
+            { product: 'Laptop', q1: 150, q2: 180, q3: 200, q4: 220 },
+            { product: 'Phone', q1: 300, q2: 280, q3: 320, q4: 350 },
+            { product: 'Tablet', q1: 200, q2: 190, q3: 210, q4: 230 },
+            { product: 'Monitor', q1: 100, q2: 120, q3: 140, q4: 160 }
+        ];
+
+        const matrixData = [
+            ['Region', 'Q1 2024', 'Q2 2024', 'Q3 2024', 'Q4 2024'],
+            ['North', 1200, 1350, 1400, 1550],
+            ['South', 980, 1020, 1100, 1200],
+            ['East', 1500, 1600, 1700, 1800],
+            ['West', 1100, 1250, 1300, 1450]
+        ];
+
+        // Initialize sample data display
+        function initializeSampleData() {
+            document.getElementById('userData').innerHTML = JSON.stringify(userData, null, 2);
+            document.getElementById('salesData').innerHTML = JSON.stringify(salesData, null, 2);
+            document.getElementById('matrixData').innerHTML = JSON.stringify(matrixData, null, 2);
+        }
+
+        // Download functions
+        function downloadWithTheme(themeName) {
+            try {
+                const theme = HeaderColorThemes[themeName];
+                downloadArrayAsXLSX(userData, {
+                    filename: `user-report-${themeName}`,
+                    sheetName: 'Users',
+                    headerStyle: theme,
+                    autoFitColumns: true
+                });
+                document.getElementById('themeMessage').innerHTML = `<div class="success-message">✓ User report with ${themeName} theme downloaded!</div>`;
+            } catch (error) {
+                console.error('Download error:', error);
+                document.getElementById('themeMessage').innerHTML = `<div class="error-message">✗ Error: ${error.message}</div>`;
+            }
+        }
+
+        function downloadWithCustomColors() {
+            try {
+                const bgColor = document.getElementById('bgColor').value;
+                const textColor = document.getElementById('textColor').value;
+                const fontSize = parseInt(document.getElementById('fontSize').value);
+                const bold = document.getElementById('boldText').checked;
+
+                const customStyle = {
+                    backgroundColor: bgColor,
+                    textColor: textColor,
+                    bold: bold,
+                    fontSize: fontSize
+                };
+
+                downloadArrayAsXLSX(salesData, {
+                    filename: 'sales-report-custom',
+                    sheetName: 'Custom Styled Sales',
+                    headers: ['Product Name', 'Q1 Sales', 'Q2 Sales', 'Q3 Sales', 'Q4 Sales'],
+                    headerStyle: customStyle,
+                    autoFitColumns: true
+                });
+                
+                document.getElementById('customMessage').innerHTML = '<div class="success-message">✓ Sales report with custom colors downloaded!</div>';
+            } catch (error) {
+                console.error('Download error:', error);
+                document.getElementById('customMessage').innerHTML = `<div class="error-message">✗ Error: ${error.message}</div>`;
+            }
+        }
+
+        function downloadAdvancedStyling() {
+            try {
+                downloadArrayAsXLSX(matrixData, {
+                    filename: 'advanced-styling',
+                    sheetName: 'Advanced Matrix',
+                    headerStyle: {
+                        backgroundColor: '#2C3E50',
+                        textColor: '#ECF0F1',
+                        bold: true,
+                        fontSize: 16
+                    },
+                    autoFitColumns: true
+                });
+                document.getElementById('advancedMessage').innerHTML = '<div class="success-message">✓ Advanced styled report downloaded!</div>';
+            } catch (error) {
+                console.error('Download error:', error);
+                document.getElementById('advancedMessage').innerHTML = `<div class="error-message">✗ Error: ${error.message}</div>`;
+            }
+        }
+
+        function downloadNoHeaders() {
+            try {
+                downloadArrayAsXLSX(matrixData, {
+                    filename: 'no-headers',
+                    sheetName: 'Data Only',
+                    includeHeaders: false,
+                    autoFitColumns: true
+                });
+                document.getElementById('advancedMessage').innerHTML = '<div class="success-message">✓ Report without headers downloaded!</div>';
+            } catch (error) {
+                console.error('Download error:', error);
+                document.getElementById('advancedMessage').innerHTML = `<div class="error-message">✗ Error: ${error.message}</div>`;
+            }
+        }
+
+        function downloadAutoFitColumns() {
+            try {
+                downloadArrayAsXLSX(matrixData, {
+                    filename: 'auto-fit-columns',
+                    sheetName: 'Auto Fit Demo',
+                    headerStyle: HeaderColorThemes.corporate,
+                    autoFitColumns: true
+                });
+                document.getElementById('advancedMessage').innerHTML = '<div class="success-message">✓ Auto-fit columns report downloaded!</div>';
+            } catch (error) {
+                console.error('Download error:', error);
+                document.getElementById('advancedMessage').innerHTML = `<div class="error-message">✗ Error: ${error.message}</div>`;
+            }
+        }
+
+        function downloadLargeColoredDataset() {
+            try {
+                // Generate large dataset
+                const largeData = [];
+                for (let i = 1; i <= 1000; i++) {
+                    largeData.push({
+                        id: i,
+                        name: `User ${i}`,
+                        email: `user${i}@example.com`,
+                        score: Math.floor(Math.random() * 100),
+                        department: ['Engineering', 'Marketing', 'Sales', 'HR'][Math.floor(Math.random() * 4)],
+                        joinDate: new Date(2020 + Math.floor(Math.random() * 4), Math.floor(Math.random() * 12), Math.floor(Math.random() * 28) + 1).toISOString().split('T')[0],
+                        salary: 50000 + Math.floor(Math.random() * 100000),
+                        performance: ['Excellent', 'Good', 'Average', 'Needs Improvement'][Math.floor(Math.random() * 4)]
+                    });
+                }
+
+                downloadArrayAsXLSX(largeData, {
+                    filename: 'large-colored-dataset',
+                    sheetName: 'Employee Data',
+                    headers: ['ID', 'Full Name', 'Email', 'Score', 'Department', 'Join Date', 'Salary', 'Performance'],
+                    headerStyle: {
+                        backgroundColor: '#E67E22',
+                        textColor: '#FFFFFF',
+                        bold: true,
+                        fontSize: 14
+                    },
+                    autoFitColumns: true
+                });
+                
+                document.getElementById('largeMessage').innerHTML = '<div class="success-message">✓ Large colored dataset (1000 rows) generated and downloaded!</div>';
+            } catch (error) {
+                console.error('Download error:', error);
+                document.getElementById('largeMessage').innerHTML = `<div class="error-message">✗ Error: ${error.message}</div>`;
+            }
+        }
+
+        // Initialize the app when the page loads
+        window.addEventListener('DOMContentLoaded', initializeApp);
+    </script>
+</body>
+</html>

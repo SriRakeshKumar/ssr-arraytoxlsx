@@ -1,0 +1,42 @@
+{
+  "name": "ssr-arraytoxlsx",
+  "version": "1.0.0",
+  "description": "A lightweight library to convert array data to downloadable XLSX files",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "prepare": "npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "xlsx",
+    "excel",
+    "download",
+    "export",
+    "array",
+    "typescript",
+    "javascript"
+  ],
+  "author": "Sri Rakesh Kumar",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/array-to-xlsx-downloader.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/array-to-xlsx-downloader/issues"
+  },
+  "homepage": "https://github.com/yourusername/array-to-xlsx-downloader#readme",
+  "dependencies": {
+    "xlsx-js-style": "^1.2.0"
+  }
+}
