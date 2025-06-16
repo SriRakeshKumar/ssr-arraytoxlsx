@@ -1,5 +1,5 @@
 {
-  "name": "ssr-arraytoxlsx",
+  "name": "ssr-xlsx-export",
   "version": "1.0.1",
   "description": "A lightweight library to convert array data to downloadable XLSX files",
   "main": "dist/index.js",
@@ -30,12 +30,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/SriRakeshKumar/ssr-arraytoxlsx.git"
+    "url": "https://github.com/SriRakeshKumar/ssr-xlsx-export.git"
   },
   "bugs": {
-    "url": "https://github.com/SriRakeshKumar/ssr-arraytoxlsx/issues"
+    "url": "https://github.com/SriRakeshKumar/ssr-xlsx-export/issues"
   },
-  "homepage": "https://github.com/SriRakeshKumar/ssr-arraytoxlsx#readme",
+  "homepage": "https://github.com/SriRakeshKumar/ssr-xlsx-export#readme",
   "dependencies": {
     "xlsx-js-style": "^1.2.0"
   }
